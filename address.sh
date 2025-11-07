@@ -1,13 +1,10 @@
 #!/bin/bash
 
-# File to store address book records
 address_book="address_book.txt"
 
-# Create the address book file if it doesn't exist
 touch "$address_book"
 
 while true; do
-  # Display menu
   echo -e "\nAddress Book Menu:"
   echo "1. Create Address Book"
   echo "2. View Address Book"
@@ -20,12 +17,12 @@ while true; do
   read choice
   
   case $choice in
-    1) # Create Address Book
+    1) 
       > "$address_book"
       echo "Address book created (or cleared) successfully!"
       ;;
       
-    2) # View Address Book
+    2) 
       if [ -s "$address_book" ]; then
         echo -e "\nAddress Book:"
         cat "$address_book"
@@ -34,7 +31,7 @@ while true; do
       fi
       ;;
       
-    3) # Insert a Record
+    3)
       echo -e "Enter Employee Number: "
       read e_no
       echo -e "Enter Employee Name: "
@@ -47,14 +44,14 @@ while true; do
       echo "Record inserted successfully!"
       ;;
       
-    4) # Delete a Record
+    4) 
       echo -e "Enter Employee Number to delete: "
       read e_no
       grep -v "$e_no" "$address_book" > temp.txt && mv temp.txt "$address_book"
       echo "Record deleted successfully!"
       ;;
       
-    5) # Modify a Record
+    5) 
       echo -e "Enter Employee Number to modify: "
       read e_no
       echo -e "Enter new Employee Number: "
@@ -65,18 +62,17 @@ while true; do
       read new_mob
       echo -e "Enter new Employee City: "
       read new_city
-      # Delete old record and insert the modified one
       grep -v "$e_no" "$address_book" > temp.txt && mv temp.txt "$address_book"
       echo -e "$new_no\t$new_name\t$new_mob\t$new_city" >> "$address_book"
       echo "Record modified successfully!"
       ;;
       
-    6) # Exit
+    6) 
       echo "Exiting..."
       exit 0
       ;;
       
-    *) # Invalid choice
+    *) 
       echo "Invalid choice! Please try again."
       ;;
   esac

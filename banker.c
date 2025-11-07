@@ -3,8 +3,8 @@
 
 int main()
 {
-  int P = 5; // Number of processes
-  int R = 3; // Number of resources
+  int P = 5;
+  int R = 3;
 
   int allocation[5][3] = {
       {0, 1, 0},
@@ -55,7 +55,6 @@ int main()
   }
   printf("\n");
 
-  // Calculate Need matrix
   printf("\nNeed Matrix:\n");
   for (int i = 0; i < P; i++)
   {
@@ -67,13 +66,11 @@ int main()
     printf("\n");
   }
 
-  // Initialize work = available
   for (int i = 0; i < R; i++)
   {
     work[i] = available[i];
   }
 
-  // Banker's algorithm for safe sequence
   while (count < P)
   {
     bool found = false;
@@ -91,7 +88,6 @@ int main()
 
         if (j == R)
         {
-          // process can be safely executed
           for (int k = 0; k < R; k++)
             work[k] += allocation[p][k];
 
@@ -102,7 +98,7 @@ int main()
       }
     }
 
-    if (found == false)
+    if (!found)
     {
       printf("\nSystem is NOT in a safe state.\n");
       return 0;
